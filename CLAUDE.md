@@ -15,7 +15,9 @@ Non-obvious decisions and conventions for future sessions.
 
 ## GitHub Pages — Staging vs. Custom Domain
 
-The site is currently built for a **GitHub Pages subpath** at `halliday2026.github.io/booth-accounting/`.
+The site is currently built for a **GitHub Pages subpath** at `halliday2026.github.io/booth_website/`.
+
+**Important:** `base` must match the GitHub repo name exactly — that's the subpath Pages uses to serve a project page.
 
 ### The 2-Line Switch
 
@@ -23,7 +25,7 @@ To go live on a custom domain, open `astro.config.mjs` and change **exactly thes
 
 | | `site` | `base` |
 |---|---|---|
-| **Staging** | `'https://halliday2026.github.io'` | `'/booth-accounting/'` |
+| **Staging** | `'https://halliday2026.github.io'` | `'/booth_website/'` |
 | **Production** | `'https://boothaccounting.com'` | `'/'` |
 
 Then add `public/CNAME` containing just: `boothaccounting.com`
