@@ -1,0 +1,50 @@
+---
+const points = [
+  {
+    heading: '25+ Years of Experience',
+    body: 'Booth Accounting has been serving individuals and small businesses in Huntington Beach since November 2000 — long enough to have seen it all.',
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+  },
+  {
+    heading: 'A Real Person, Not a Portal',
+    body: 'You get direct access to Jamie Booth — not a ticket system, not a call center. Your questions get real answers from someone who knows your accounts.',
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+  },
+  {
+    heading: 'Built on Long-Term Relationships',
+    body: 'Most clients have worked with Booth Accounting for years — sometimes decades. That continuity means less time catching up and more time moving forward.',
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  },
+];
+---
+
+<section id="why-booth" class="px-6 py-24">
+  <div class="mx-auto max-w-6xl">
+    <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">Why Booth</p>
+    <h2
+      class="mb-16 max-w-xl text-3xl font-black text-primary sm:text-4xl"
+      style="font-family: var(--font-heading);"
+    >
+      What sets us apart
+    </h2>
+
+    <ul class="grid grid-cols-1 gap-10 sm:grid-cols-3" role="list">
+      {
+        points.map((point) => (
+          <li class="flex flex-col">
+            <div class="mb-5 text-accent">
+              <Fragment set:html={point.icon} />
+            </div>
+            <h3
+              class="mb-3 text-xl font-bold text-primary"
+              style="font-family: var(--font-heading);"
+            >
+              {point.heading}
+            </h3>
+            <p class="text-base leading-relaxed text-text-muted">{point.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

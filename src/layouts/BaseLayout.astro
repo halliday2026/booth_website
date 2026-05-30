@@ -1,0 +1,92 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = 'Booth Accounting | Accounting You Don\'t Have to Think About',
+  description = 'Booth Accounting provides full-charge accounting, financial statements, tax preparation, bookkeeping, and personal daily money management in Huntington Beach, CA.',
+  ogImage = `${import.meta.env.BASE_URL}og-image.png`,
+} = Astro.props;
+
+// Default to noindex ON for staging. To enable indexing on production:
+// set NOINDEX=false in your environment or GitHub Actions env variables.
+// Uses || (not ??) so an empty-string env var is treated as falsy.
+const noindex = (import.meta.env.NOINDEX || 'true') === 'true';
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'AccountingService'],
+  name: 'Booth Accounting',
+  legalName: 'Booth Accounting, Inc.',
+  description:
+    'Full-service accounting, bookkeeping, tax preparation, financial statements, and personal daily money management.',
+  url: 'https://boothaccounting.com', // TODO: confirm final domain
+  email: 'hello@boothaccounting.com', // TODO: verify email address
+  telephone: '(xxx) xxx-xxxx', // TODO: replace with real phone number
+  foundingDate: '2000',
+  areaServed: {
+    '@type': 'City',
+    name: 'Huntington Beach',
+    containedIn: 'California',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Huntington Beach',
+    addressRegion: 'CA',
+    addressCountry: 'US',
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+
+    <!-- Google Fonts: Lato (headings) + Source Sans 3 (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="font-body text-primary bg-white antialiased">
+    <slot />
+  </body>
+</html>
